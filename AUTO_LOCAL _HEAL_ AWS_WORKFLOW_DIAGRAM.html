@@ -1,0 +1,122 @@
+<script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs"></script>
+<!-- <h1></h1> -->
+<!-- <p></p> -->
+<pre class="mermaid">
+
+flowchart TD
+    %% System Components
+    A[🖥️ Local Windows System] --> B[📊 Monitoring Agent]
+    B --> C{🚨 Issue Detected?}
+    
+    %% Normal Flow
+    C -->|No Issues| D[✅ System Healthy]
+    D --> E[⏰ Wait 10 seconds]
+    E --> B
+    
+    %% Issue Detection Flow
+    C -->|High CPU/Memory/Disk| F[🔍 Debug Agent]
+    F --> G[🤖 AI Analysis<br/>Gemini LLM]
+    G --> H[📋 Generate Remedies]
+    H --> I[⚖️ Risk Assessment]
+    
+    %% Remedy Validation
+    I --> J[👤 Human Validator<br/>Streamlit UI]
+    J --> K{Approve Remedy?}
+    
+    %% Approved Path
+    K -->|✅ Approved| L[⚡ Execution Agent]
+    L --> M[🛡️ Safe Command Check]
+    M --> N{Command Safe?}
+    N -->|✅ Safe| O[🔧 Execute Remedy]
+    N -->|❌ Unsafe| P[🚫 Block Execution]
+    
+    %% Rejected Path
+    K -->|❌ Rejected| Q[🔺 Escalation Agent]
+    Q --> R[📧 Notify Administrator]
+    R --> S[⏹️ System Access Revoked]
+    
+    %% Execution Results
+    O --> T{Execution Success?}
+    T -->|✅ Success| U[📝 Log Success]
+    T -->|❌ Failed| V[📝 Log Failure]
+    
+    %% Knowledge Base Updates
+    U --> W[🧠 Knowledge Base<br/>SQLite DB]
+    V --> W
+    P --> W
+    
+    %% Learning Loop
+    W --> X[📈 Update Success Rates]
+    X --> Y[🔄 Improve Future Analysis]
+    Y --> G
+    
+    %% Logging System
+    Z[📋 Agent Logger] --> W
+    B --> Z
+    F --> Z
+    L --> Z
+    Q --> Z
+    
+    %% Stress Testing (for demo)
+    ST1[💻 CPU Stress Test] -.-> A
+    ST2[💾 Memory Stress Test] -.-> A
+    ST3[💽 Disk Stress Test] -.-> A
+    
+    %% UI Dashboard
+    UI[🌐 Streamlit Dashboard] --> B
+    UI --> J
+    UI --> W
+    UI --> ST1
+    UI --> ST2
+    UI --> ST3
+    
+    %% Database Schema
+    subgraph DB [🗄️ Database Tables]
+        W1[incidents<br/>- timestamp<br/>- condition_type<br/>- severity<br/>- metrics]
+        W2[remedies<br/>- incident_id<br/>- command<br/>- risk_level<br/>- success_rate]
+        W3[executions<br/>- remedy_id<br/>- status<br/>- output<br/>- user_approved]
+    end
+    
+    W --> W1
+    W --> W2
+    W --> W3
+    
+    %% Agent Types with Colors
+    classDef monitorAgent fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef debugAgent fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef executeAgent fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef escalateAgent fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef humanAgent fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    classDef dataAgent fill:#f1f8e9,stroke:#33691e,stroke-width:2px
+    classDef stressTest fill:#ffebee,stroke:#c62828,stroke-width:2px,stroke-dasharray: 5 5
+    
+    class B monitorAgent
+    class F,G,H,I debugAgent
+    class L,M,O executeAgent
+    class Q,R,S escalateAgent
+    class J,K humanAgent
+    class W,W1,W2,W3,X,Y,Z dataAgent
+    class ST1,ST2,ST3 stressTest
+    
+    %% Threshold Settings
+    subgraph THRESH [⚙️ Configurable Thresholds]
+        TH1[CPU > 80%]
+        TH2[Memory > 85%]
+        TH3[Disk > 90%]
+    end
+    
+    C --> THRESH
+    
+    %% Safe Commands List
+    subgraph SAFE [🛡️ Safe Command Whitelist]
+        SC1[restart_explorer]
+        SC2[clear_cache]
+        SC3[clean_temp]
+        SC4[kill_high_cpu]
+        SC5[restart_services]
+    end
+    
+    M --> SAFE
+
+</pre>
+<!-- <p></p> -->
