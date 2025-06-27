@@ -1,0 +1,51 @@
+// Basic logging level
+logging {
+  level = "info"
+}
+
+// Scrape PetClinic logs
+loki.source.file "petclinic_logs" {
+  targets = [
+    {__path__ = "/var/log/petclinic*.log", job = "petclinic"},
+  ]
+  forward_to = [loki.process.default.receiver]
+}
+
+// Scrape system logs
+loki.source.file "system_logs" {
+  targets = [
+    {__path__ = "/var/log/messages", job = "varlogs"},
+    {__path__ = "/var/log/syslog", job = "system_logs"},
+    {__path__ = "/var/log/auth.log", job = "system_logs"},
+    {__path__ = "/var/log/dmesg", job = "system_logs"},
+  ]
+  forward_to = [loki.process.default.receiver]
+}
+
+// Scrape CPU stress logs
+loki.source.file "cpu_stress" {
+  targets = [
+    {__path__ = "/var/log/cpu_stress.log", job = "cpu_stress"},
+  ]
+  forward_to = [loki.process.default.receiver]
+}
+
+// Scrape memory stress logs
+loki.source.file "memory_stress" {
+  targets = [
+    {__path__ = "/var/log/memory_stress.log", job = "memory_stress"},
+  ]
+  forward_to = [loki.process.default.receiver]
+}
+
+// Processing step
+loki.process "default" {
+  forward_to = [loki.write.default.receiver]
+}
+
+// Loki write endpoint
+loki.write "default" {
+  endpoint {
+    url = "http://localhost:3100/loki/api/v1/push"
+  }
+}
