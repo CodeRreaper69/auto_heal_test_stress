@@ -1,4 +1,22 @@
 # AWS AUTO HEAL INFRASTRUCTURE 
+For them - 
+# View latest logs
+sudo python3 /opt/log-collector/log_viewer.py
+
+# View specific file
+sudo python3 /opt/log-collector/log_viewer.py --file enhanced_system_20250627_103000.json
+
+# Show more processes
+sudo python3 /opt/log-collector/log_viewer.py --processes 50
+
+# List available log files
+sudo python3 /opt/log-collector/log_viewer.py --list-files
+
+# Show fewer services and connections
+sudo python3 /opt/log-collector/log_viewer.py --services 5 --connections 5
+
+
+
 
 1) I will test them on my local system first!
 2) I will try to put some stress tests on my CPU through and see if the agents by gathering my running process lists, logs and all can assess, what exact command to run.
