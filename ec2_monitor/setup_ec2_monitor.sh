@@ -51,7 +51,7 @@ install_dependencies() {
     
 #     print_status "Installing Python dependencies..."
 #     pip3 install psutil pytz
-# }
+}
 
 # Create installation directory
 create_directories() {
