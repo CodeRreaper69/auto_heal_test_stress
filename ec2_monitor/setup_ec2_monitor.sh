@@ -49,9 +49,9 @@ install_dependencies() {
     # Install Python3 and pip if not present
     apt-get install -y python3 python3-pip python3-venv
     
-    print_status "Installing Python dependencies..."
-    pip3 install psutil pytz
-}
+#     print_status "Installing Python dependencies..."
+#     pip3 install psutil pytz
+# }
 
 # Create installation directory
 create_directories() {
