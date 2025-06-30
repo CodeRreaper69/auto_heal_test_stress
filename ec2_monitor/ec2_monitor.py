@@ -264,7 +264,7 @@ class EnhancedEC2Monitor:
                 if os.path.exists(log_path):
                     logs[log_type] = self.tail_log_file(log_path, lines=50)
             except Exception as e:
-                logs[log_type] = f"Error reading {log_path}: {e}"
+                logs[log_type] = [f"Error reading {log_path}: {e}"]
         
         return logs
     
@@ -303,20 +303,14 @@ class EnhancedEC2Monitor:
         
         return app_logs
     
-    # def tail_log_file(self, file_path, lines=50):
-    #     """Get last N lines from a log file"""
-    #     try:
-    #         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-    #             return deque(f, maxlen=lines)
-    #     except Exception:
-    #         return []
     def tail_log_file(self, file_path, lines=50):
-        """Get last N lines from a log file"""
+        """Get last N lines from a log file - returns a list (JSON serializable)"""
         try:
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                return list(deque(f, maxlen=lines))  # Convert deque to list
-        except Exception:
-            return []
+                # Use deque for efficient line collection, then convert to list
+                return list(deque(f, maxlen=lines))
+        except Exception as e:
+            return [f"Error reading {file_path}: {str(e)}"]
     
     def get_security_events(self):
         """Extract security-related events"""
