@@ -1,5 +1,5 @@
 # To run the cpu_stress_with_logging.py run this - 
-- sudo python3 cpu_stress_with_logging.py <time in seconds for running it> <Number of cores you want to stress>
+- ```sudo python3 cpu_stress_with_logging.py <time in seconds for running it> <Number of cores you want to stress>```
 - Example run - ```sudo python3 cpu_stress_with_logging.py 240 2``` - ## This will run it for 240 seconds occupying 2 CPU cores
 - Logs will get saved at - ```/var/log/cpu_stress.log```
 Sample output (Will not be visible on command prompt, but rather on Grafana or in log files, to get the logs on command line, run the same but the codes without `with_logging` part' i.e, `python3 cpu_stress.py  240 2` )
@@ -21,7 +21,7 @@ Sample output (Will not be visible on command prompt, but rather on Grafana or i
 ```
 
 # To run the memory_stress_with_logging.py run this -
-- sudo python3 memory_stress_with_logging.py <How much percent of memory to stress>  <Time in seconds until it runs>
+- ```sudo python3 memory_stress_with_logging.py <How much percent of memory to stress>  <Time in seconds until it runs>```
 - Example run - ```sudo python3 memory_stress_with_logging.py 70 240``` ## This will run it for 240 seconds occupying 70% of the memory
 - Logs will get saved at - ```/var/log/memory_stress.log```
 Sample output (Will not be visible on command prompt, but rather on Grafana or in log files to get the logs on command line, run the same but the codes without `with_logging` part' i.e, `python3 memory_stress.py  70 240` )
