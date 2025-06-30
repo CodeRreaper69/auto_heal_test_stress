@@ -303,11 +303,18 @@ class EnhancedEC2Monitor:
         
         return app_logs
     
+    # def tail_log_file(self, file_path, lines=50):
+    #     """Get last N lines from a log file"""
+    #     try:
+    #         with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+    #             return deque(f, maxlen=lines)
+    #     except Exception:
+    #         return []
     def tail_log_file(self, file_path, lines=50):
         """Get last N lines from a log file"""
         try:
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                return deque(f, maxlen=lines)
+                return list(deque(f, maxlen=lines))  # Convert deque to list
         except Exception:
             return []
     
