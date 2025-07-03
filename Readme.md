@@ -44,3 +44,4 @@ Sample output (Will not be visible on command prompt, but rather on Grafana or i
 2025-06-30 13:18:11,220 - INFO - Releasing 145 memory blocks...
 2025-06-30 13:18:11,543 - INFO - Memory stress test completed. Final usage: 33.7%
 ```
+# To install python libraries, the correct command instead of ```pip3 install <lib name>``` is ```sudo apt install python3-<library-name>``` 
