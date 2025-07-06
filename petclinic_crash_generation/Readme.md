@@ -10,6 +10,19 @@ The workflow is designed for testing debugging agents:
 3. **Revert everything** using `crash_reverter.py` if the agent fails
 4. **Repeat** with different scenarios
 
+# Example - 
+# Most common - revert everything
+```python3 crash_reverter.py --full```
+
+# Check what's currently broken
+```python3 crash_reverter.py --status```
+
+# Just kill processes blocking port 8080
+```python3 crash_reverter.py --kill-processes```
+
+# Restore only modified files
+```python3 crash_reverter.py --restore-files```
+
 ## Setup
 
 ### 1. Place the scripts on your system:
